@@ -13,7 +13,7 @@ public class Runner {
     Scanner scanner = new Scanner(System.in);
     ProgramData progDate = new ProgramData();
     
-    public Boolean getInitialInformation() {
+    public ProgramData getInitialInformation() {
 
         System.out.println(message.getMessage("greeting"));
         System.out.println(message.getMessage("queryDate"));
@@ -35,7 +35,7 @@ public class Runner {
             if ((quanFloar < 1) || (heightFloors < 1 ||  heightFloors > 4) ||
                     (liftSpeed < 1 || liftSpeed > 19) || 
                     (openingClosingTime < 2 || openingClosingTime > 20)){
-                return false;
+                return null;
             }else{
                 progDate.setQuantityFloors(quanFloar);
                 progDate.setHeightFloors(heightFloors);
@@ -43,15 +43,35 @@ public class Runner {
                 progDate.setDoorOpeningClosingTime(openingClosingTime);
             }
         } catch (Exception e) {
-            return false;
+            return null;
         }
 
 
-        return true;
+        return progDate;
 
     }
     
+    public String inputRequest(Lift lift) {
+        
+        System.out.println(message.getMessage("trait"));
+        System.out.println(message.getMessage("queryImput"));
+        
+        //Если пустой лифт закрыл двери
+        if("3".equals(lift.getState())){
+            System.out.println(message.getMessage("firstOption"));
+        }
+        //полный лифт открыл двери
+        else if("4".equals(lift.getState())){
+            System.out.println(message.getMessage("lastOption"));
+        }
+
+        System.out.println(message.getMessage("exitOption"));
+        String userChoice = scanner.nextLine();
+        
+        return userChoice;
+    }
+    
     public void endProgram() {
-        System.out.println(message.getMessage("greeting"));
+        System.out.println(message.getMessage("queryEndProgramm"));
     }
 }

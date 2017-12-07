@@ -94,7 +94,7 @@ public class ProgramData {
 
     @Override
     public String toString() {
-        return "UserInterface{" + "quantityFloors=" + quantityFloors + ", heightFloors=" + heightFloors + ", liftSpeed=" + liftSpeed + ", doorOpeningClosingTime=" + doorOpeningClosingTime + '}';
+        return "ProgramData{" + "quantityFloors=" + quantityFloors + ", heightFloors=" + heightFloors + ", liftSpeed=" + liftSpeed + ", doorOpeningClosingTime=" + doorOpeningClosingTime + '}';
     }
     
     
