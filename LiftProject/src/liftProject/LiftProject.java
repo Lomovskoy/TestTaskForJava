@@ -59,7 +59,8 @@ public class LiftProject {
         
         //Вобар действия пользователя
         //в начале программы лифт стоит пустой с закрытыми дверьми по умолчени.
-        Lift lift = new Lift("3");
+        Byte Floor = 1;
+        Lift lift = new Lift("3", Floor);
         String userChoice = "";
         while (true){
             if (lift.getState().equals("3") || lift.getState().equals("4")){
@@ -67,14 +68,16 @@ public class LiftProject {
             }
             //Если выход
             if (userChoice.equals("3")){
+                
                 break;
             }
             //Если вызов лифта из подьезда
             else if (userChoice.equals("1") && lift.getState().equals("3")){
-                break;
+                lift = runner.runningLift(lift);
+                userChoice = runner.inputRequest(lift);
             }//Если нажать на кнопку этажа внутри лифта
-            else if (userChoice.equals("2") && lift.getState().equals("4")){
-                break;
+            else if (userChoice.equals("2") && lift.getState().equals("5")){
+                userChoice = runner.choiceOfFloor(lift);
             }
         }
  

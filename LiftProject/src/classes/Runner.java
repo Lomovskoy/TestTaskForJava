@@ -16,14 +16,14 @@ public class Runner {
     public ProgramData getInitialInformation() {
 
         System.out.println(message.getMessage("greeting"));
-        System.out.println(message.getMessage("queryDate"));
-        System.out.println(message.getMessage("queryFlors"));
+        System.out.println(message.getMessage("query.Date"));
+        System.out.println(message.getMessage("query.Flors"));
         String quanFloarStr = scanner.nextLine();
-        System.out.println(message.getMessage("queryHeightFloors"));
+        System.out.println(message.getMessage("query.HeightFloors"));
         String heightFloorsStr = scanner.nextLine();
-        System.out.println(message.getMessage("queryLiftSpeed"));
+        System.out.println(message.getMessage("query.LiftSpeed"));
         String liftSpeedStr = scanner.nextLine();
-        System.out.println(message.getMessage("queryDoorOpeningClosingTime"));
+        System.out.println(message.getMessage("query.DoorOpeningClosingTime"));
         String openingClosingTimeStr = scanner.nextLine();
 
         try {
@@ -54,14 +54,14 @@ public class Runner {
     public String inputRequest(Lift lift) {
         
         System.out.println(message.getMessage("trait"));
-        System.out.println(message.getMessage("queryImput"));
+        System.out.println(message.getMessage("query.Imput"));
         
         //Если пустой лифт закрыл двери
         if("3".equals(lift.getState())){
             System.out.println(message.getMessage("firstOption"));
         }
-        //полный лифт открыл двери
-        else if("4".equals(lift.getState())){
+        //полный лифт закрыл двери
+        else if("5".equals(lift.getState())){
             System.out.println(message.getMessage("lastOption"));
         }
 
@@ -71,7 +71,20 @@ public class Runner {
         return userChoice;
     }
     
+    public Lift runningLift(Lift lift){
+        
+        System.out.println(message.getMessage("query.Liftopendoor"));
+        System.out.println(message.getMessage("query.Liftclossedoor"));
+        lift.setState("5");
+        return lift;
+    }
+    
+    public String choiceOfFloor(Lift lift){
+        
+        return userChoice;
+    }
+    
     public void endProgram() {
-        System.out.println(message.getMessage("queryEndProgramm"));
+        System.out.println(message.getMessage("query.EndProgramm"));
     }
 }

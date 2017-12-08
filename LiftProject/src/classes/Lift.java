@@ -10,12 +10,14 @@ import java.util.ResourceBundle;
 public class Lift {
     
     String state;
+    Byte floor;
 
     public Lift() {
     }
 
-    public Lift(String state) {
+    public Lift(String state, Byte floor) {
         this.state = state;
+        this.floor = floor;
     }
 
     public String getState() {
@@ -26,10 +28,19 @@ public class Lift {
         this.state = state;
     }
 
+    public Byte getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Byte floor) {
+        this.floor = floor;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.state);
+        hash = 97 * hash + Objects.hashCode(this.state);
+        hash = 97 * hash + Objects.hashCode(this.floor);
         return hash;
     }
 
@@ -48,15 +59,20 @@ public class Lift {
         if (!Objects.equals(this.state, other.state)) {
             return false;
         }
+        if (!Objects.equals(this.floor, other.floor)) {
+            return false;
+        }
         return true;
     }
+    
+   
 
     @Override
     public String toString() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("resource.stateLift");
         String message = resourceBundle.getString(state);
         //return message;
-        return "Lift{ " + "state = " + message + " }";
+        return "Lift{ " + "state = " + message + " floor= " + floor + "}";
     }
     
     
