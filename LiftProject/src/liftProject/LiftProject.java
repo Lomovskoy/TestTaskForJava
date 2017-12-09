@@ -53,21 +53,22 @@ public class LiftProject {
                 break;
             }
             else{
-                System.out.println(message.getMessage("queryFirstInputError"));
+                System.out.println(message.getMessage("query.FirstInputError"));
             }
         }
         
         //Вобар действия пользователя
-        //в начале программы лифт стоит пустой с закрытыми дверьми по умолчени.
+        //в начале программы лифт стоит пустой с закрытыми дверьми по умолчению.
         Byte Floor = 1;
         Lift lift = new Lift("3", Floor);
         String userChoice = "";
         while (true){
-            if (lift.getState().equals("3") || lift.getState().equals("4")){
+            //если пустой лифт закрыл двери или 
+            if (lift.getState().equals("3")){
                 userChoice = runner.inputRequest(lift);
             }
             //Если выход
-            if (userChoice.equals("3")){
+            if (userChoice.equals("q")){
                 
                 break;
             }
@@ -78,6 +79,18 @@ public class LiftProject {
             }//Если нажать на кнопку этажа внутри лифта
             else if (userChoice.equals("2") && lift.getState().equals("5")){
                 userChoice = runner.choiceOfFloor(lift);
+                if (userChoice != null){
+                    lift = runner.switchStateLift(lift, userChoice);
+                }else{
+                    userChoice = "2";
+                }
+            }
+            //Если лифт едет
+            else if (lift.getState().equals("1")){
+                lift = runner.moveLift(lift, userChoice);
+            }
+            else{
+                userChoice = runner.inputRequest(lift);
             }
         }
  

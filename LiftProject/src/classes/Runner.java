@@ -1,5 +1,6 @@
 package classes;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -81,7 +82,57 @@ public class Runner {
     
     public String choiceOfFloor(Lift lift){
         
-        return userChoice;
+        System.out.println(message.getMessage("query.ChoiceOfFloor")+" от 1 до "+progDate.getQuantityFloors().toString());
+        String userChoice = scanner.nextLine();
+        
+        try {
+            if ((Byte.parseByte(userChoice) > 0) && (Byte.parseByte(userChoice) <= progDate.getQuantityFloors())){
+                return userChoice;
+            }
+            else{
+                System.out.println(message.getMessage("query.ErrorFloor"));
+                return null;
+            }
+                
+        } catch (Exception e) {
+            System.out.println(message.getMessage("query.ErrorFloor"));
+            return null;
+        }
+
+        //return userChoice;
+    }
+    public Lift switchStateLift(Lift lift, String userChoice){
+        lift.setState("1");
+        return lift;
+    }
+    
+    public Lift moveLift(Lift lift, String userChoice){
+        Byte floor = Byte.parseByte(userChoice);
+        Byte currentFloor = lift.getFloor();
+        
+        if (Objects.equals(currentFloor, floor)){
+            System.out.println(message.getMessage("query.Liftopendoor"));
+            System.out.println(message.getMessage("query.Liftclossedoor"));
+            lift.setState("3");
+        }
+        else{
+
+            while(!Objects.equals(currentFloor, floor)){
+                
+                if(currentFloor < floor){
+                    currentFloor++ ;
+                    lift.setFloor(currentFloor);
+                }else{
+                    currentFloor--;
+                    lift.setFloor(currentFloor);
+                }
+                System.out.printf(message.getMessage("query.LiftMove"),lift.getFloor().toString());
+               
+            }
+            
+        }
+        
+        return lift;
     }
     
     public void endProgram() {
