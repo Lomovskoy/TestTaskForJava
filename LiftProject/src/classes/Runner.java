@@ -2,7 +2,6 @@ package classes;
 
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.Timer;
 
 /**
  * Этот класс отвечает за этапы запуска программы
@@ -139,18 +138,22 @@ public class Runner {
             }
             lift.setState("3");
         } else {
-
+            
+            Float travelTimeFloor = (float) progDate.getHeightFloors() / progDate.getLiftSpeed();
+            
+            timer = new Timers(travelTimeFloor);
             while (!Objects.equals(currentFloor, floor)) {
-
-                if (currentFloor < floor) {
-                    currentFloor++;
-                    lift.setFloor(currentFloor);
-                } else {
-                    currentFloor--;
-                    lift.setFloor(currentFloor);
+                Boolean time = timer.timerControllerStart();
+                if (time) {
+                    if (currentFloor < floor) {
+                        currentFloor++;
+                        lift.setFloor(currentFloor);
+                    } else {
+                        currentFloor--;
+                        lift.setFloor(currentFloor);
+                    }
+                    System.out.printf(message.getMessage("query.LiftMove"), lift.getFloor().toString());
                 }
-                System.out.printf(message.getMessage("query.LiftMove"), lift.getFloor().toString());
-
             }
 
         }

@@ -1,5 +1,7 @@
 package classes;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 /**
@@ -22,6 +24,13 @@ public class Timers {
         finalTime = 0L;
     }
 
+    public Timers(Float lengthTime) {
+        Double newlengthTime = new BigDecimal(lengthTime).setScale(4, RoundingMode.UP).doubleValue();
+        this.lengthTime = (new Double(newlengthTime * 1000)).longValue();
+
+        finalTime = 0L;
+    }
+    
     public Boolean timerControllerStart(){
         
         сurentTime = System.currentTimeMillis();
