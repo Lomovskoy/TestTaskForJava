@@ -75,7 +75,10 @@ public class LiftProject {
             //Если вызов лифта из подьезда
             else if (userChoice.equals("1") && lift.getState().equals("3")){
                 lift = runner.runningLift(lift);
-                userChoice = runner.inputRequest(lift);
+                if (lift.getState() != null){
+                    userChoice = runner.inputRequest(lift);
+                }
+
             }//Если нажать на кнопку этажа внутри лифта
             else if (userChoice.equals("2") && lift.getState().equals("5")){
                 userChoice = runner.choiceOfFloor(lift);

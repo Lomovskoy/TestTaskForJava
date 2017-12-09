@@ -13,6 +13,7 @@ public class Runner {
     Message message = new Message();
     Scanner scanner = new Scanner(System.in);
     ProgramData progDate = new ProgramData();
+    private Object timer;
     
     public ProgramData getInitialInformation() {
 
@@ -59,6 +60,7 @@ public class Runner {
         
         //Если пустой лифт закрыл двери
         if("3".equals(lift.getState())){
+            
             System.out.println(message.getMessage("firstOption"));
         }
         //полный лифт закрыл двери
@@ -72,17 +74,25 @@ public class Runner {
         return userChoice;
     }
     
-    public Lift runningLift(Lift lift){
-        
-        System.out.println(message.getMessage("query.Liftopendoor"));
-        System.out.println(message.getMessage("query.Liftclossedoor"));
-        lift.setState("5");
+    public Lift runningLift(Lift lift){ 
+        if (timer == null){
+            Long openDoorTime = (long) progDate.getDoorOpeningClosingTime();
+            timer = new Timer(openDoorTime);
+            System.out.println(message.getMessage("query.Liftopendoor"));
+
+        }
+        if (timer.equals(true) && timer != null){
+            System.out.println(message.getMessage("query.Liftclossedoor"));
+            lift.setState("5");
+            timer = null;
+           
+        }
         return lift;
     }
     
     public String choiceOfFloor(Lift lift){
         
-        System.out.println(message.getMessage("query.ChoiceOfFloor")+" от 1 до "+progDate.getQuantityFloors().toString());
+        System.out.println(message.getMessage("query.ChoiceOfFloor") + " от 1 до "+progDate.getQuantityFloors().toString());
         String userChoice = scanner.nextLine();
         
         try {
