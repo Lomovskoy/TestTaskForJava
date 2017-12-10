@@ -38,9 +38,7 @@ public class Timers {
             finalTime = сurentTime + lengthTime;
         }
         
-        
         //System.out.println(Long.toString((finalTime - сurentTime) / 1000));
-        
         if (finalTime <= сurentTime){
             timerControllerStop();
             return true;

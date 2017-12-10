@@ -3,7 +3,7 @@ package classes;
 import java.util.Objects;
 
 /**
- * Этот класс предназначен для ввода пользователя
+ * Этот класс предназначен для хранения основной информации о программе
  * @author imxo
  */
 public class ProgramData {
