@@ -65,7 +65,7 @@ public class LiftProject {
         String userChoice = "";
         while (true){
             //если пустой лифт закрыл двери или 
-            if (lift.getState().equals("3")){
+            if (lift.getState().equals("3") ){
                 userChoice = runner.inputRequest(lift);
             }
             //Если выход
